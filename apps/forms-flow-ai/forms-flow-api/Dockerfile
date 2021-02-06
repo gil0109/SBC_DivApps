@@ -8,6 +8,8 @@ RUN pip install psycopg2
 
 RUN pip install .
 
+RUN mkdir /nltk_data && chmod 777 /nltk_data
+
 EXPOSE 5000
 RUN chmod u+x ./entrypoint
 ENTRYPOINT ["/bin/sh", "entrypoint"]
