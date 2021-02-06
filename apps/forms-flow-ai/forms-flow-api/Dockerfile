@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM docker-remote.artifacts.developer.gov.bc.ca/python:3.8
 
 ADD . /forms-flow-api/app
 WORKDIR /forms-flow-api/app
