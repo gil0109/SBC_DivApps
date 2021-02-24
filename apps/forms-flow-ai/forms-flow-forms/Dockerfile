@@ -4,10 +4,10 @@
 
 # Use Node image, maintained by Docker:
 # hub.docker.com/r/_/node/
-FROM node:12.2.0-alpine
+FROM docker-remote.artifacts.developer.gov.bc.ca/node:12.2.0-alpine
 
 # set working directory
-WORKDIR /forms/
+WORKDIR /app
 
 # "bcrypt" requires python/make/g++, all must be installed in alpine
 # (note: using pinned versions to ensure immutable build environment)
@@ -29,6 +29,7 @@ ENV NPM_PACKAGES=/.npm-packages \
 RUN echo "prefix = $NPM_PACKAGES" >> ~/.npmrc
 
 # Include details of the required dependencies
+RUN cp -rf /web/forms-flow-forms/* /app/
 COPY ./package.json $NPM_PACKAGES/
 COPY ./package-lock.json $NPM_PACKAGES/
 
