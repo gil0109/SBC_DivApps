@@ -32,6 +32,8 @@ ENV NPM_PACKAGES=/.npm-packages \
 RUN echo "prefix = $NPM_PACKAGES" >> ~/.npmrc
 
 # Include details of the required dependencies
+RUN ls -l /.n*
+RUN find / -name .npm-packages
 RUN cp /app/package.json $NPM_PACKAGES/
 RUN cp /app/package-lock.json $NPM_PACKAGES/
 
