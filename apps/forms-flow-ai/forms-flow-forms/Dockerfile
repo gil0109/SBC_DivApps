@@ -30,7 +30,6 @@ ENV NPM_PACKAGES=/.npm-packages \
 RUN echo "prefix = $NPM_PACKAGES" >> ~/.npmrc
 
 # Include details of the required dependencies
-RUN ls /tmp/build/inputs/apps/forms-flow-ai/forms-flow-forms
 RUN echo "...."
 RUN ls -l
 COPY package.json $NPM_PACKAGES/
