@@ -26,13 +26,13 @@ RUN cp -rf /web/forms-flow-forms/* /app/
 # Using an alternative package install location
 # to allow overwriting the /app folder at runtime
 # stackoverflow.com/a/13021677
+RUN mkdir /.npm-packages
 ENV NPM_PACKAGES=/.npm-packages \
     PATH=$NPM_PACKAGES/bin:$PATH \
     NODE_PATH=$NPM_PACKAGES/lib/node_modules:$NODE_PATH
 RUN echo "prefix = $NPM_PACKAGES" >> ~/.npmrc
 
 # Include details of the required dependencies
-RUN find / -name .npm-packages
 RUN cp /app/package.json $NPM_PACKAGES/
 RUN cp /app/package-lock.json $NPM_PACKAGES/
 
