@@ -4,7 +4,7 @@
 
 # Use Node image, maintained by Docker:
 # hub.docker.com/r/_/node/
-FROM docker-remote.artifacts.developer.gov.bc.ca/node:12.2.0-alpine
+FROM docker-remote.artifacts.developer.gov.bc.ca/node:lts-alpine3.10
 
 # set working directory
 WORKDIR /app
@@ -14,8 +14,11 @@ WORKDIR /app
 RUN apk update && \
     apk upgrade && \
     apk add make=4.2.1-r2 && \
-    apk add g++=8.3.0-r0 &&\
-    apk add git
+    apk add g++=8.3.0-r0 
+
+RUN apk --update add git
+# Use https to avoid requiring ssh keys for public repos.
+RUN git config --global url."https://github.com/".insteadOf "ssh://git@github.com/"
 
 # Clone code
 RUN git clone -b v4.0.0-alpha  https://github.com/AOT-Technologies/forms-flow-ai.git /web/
@@ -30,8 +33,8 @@ ENV NPM_PACKAGES=/.npm-packages \
 RUN echo "prefix = $NPM_PACKAGES" >> ~/.npmrc
 
 # Include details of the required dependencies
-RUN echo "...."
 RUN ls -l
+RUN ls $NPM_PACKAGES/
 COPY package.json $NPM_PACKAGES/
 COPY package-lock.json $NPM_PACKAGES/
 
