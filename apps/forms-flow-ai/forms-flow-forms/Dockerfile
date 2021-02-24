@@ -18,7 +18,8 @@ RUN apk update && \
     apk add git
 
 # Clone code
-RUN git clone -b v4.0.0-alpha  https://github.com/AOT-Technologies/forms-flow-ai.git /forms/
+RUN git clone -b v4.0.0-alpha  https://github.com/AOT-Technologies/forms-flow-ai.git /web/
+RUN cp -rf /web/forms-flow-forms/* /app/
 
 # Using an alternative package install location
 # to allow overwriting the /app folder at runtime
@@ -29,7 +30,7 @@ ENV NPM_PACKAGES=/.npm-packages \
 RUN echo "prefix = $NPM_PACKAGES" >> ~/.npmrc
 
 # Include details of the required dependencies
-RUN cp -rf /forms/forms-flow-forms/* /app/
+RUN ls -l /app
 COPY /app/package.json $NPM_PACKAGES/
 COPY /app/package-lock.json $NPM_PACKAGES/
 
