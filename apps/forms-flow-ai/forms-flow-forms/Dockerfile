@@ -23,7 +23,6 @@ RUN git config --global url."https://github.com/".insteadOf "ssh://git@github.co
 # Clone code
 RUN git clone -b v4.0.0-alpha  https://github.com/AOT-Technologies/forms-flow-ai.git /web/
 RUN cp -rf /web/forms-flow-forms/* /app/
-COPY /web/forms-flow-forms /app
 # Using an alternative package install location
 # to allow overwriting the /app folder at runtime
 # stackoverflow.com/a/13021677
@@ -33,8 +32,8 @@ ENV NPM_PACKAGES=/.npm-packages \
 RUN echo "prefix = $NPM_PACKAGES" >> ~/.npmrc
 
 # Include details of the required dependencies
-COPY package.json $NPM_PACKAGES/
-COPY package-lock.json $NPM_PACKAGES/
+RUN cp /app/package.json $NPM_PACKAGES/
+RUN cp /app/package-lock.json $NPM_PACKAGES/
 
 # Use "Continuous Integration" to install as-is from package-lock.json
 RUN npm ci --prefix=$NPM_PACKAGES
