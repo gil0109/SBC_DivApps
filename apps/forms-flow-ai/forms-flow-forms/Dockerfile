@@ -30,8 +30,8 @@ RUN echo "prefix = $NPM_PACKAGES" >> ~/.npmrc
 
 # Include details of the required dependencies
 RUN cp -rf /forms/forms-flow-forms/* /app/
-COPY ./package.json $NPM_PACKAGES/
-COPY ./package-lock.json $NPM_PACKAGES/
+COPY /app/package.json $NPM_PACKAGES/
+COPY /app/package-lock.json $NPM_PACKAGES/
 
 # Use "Continuous Integration" to install as-is from package-lock.json
 RUN npm ci --prefix=$NPM_PACKAGES
