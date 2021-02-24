@@ -52,7 +52,7 @@ ENV DEBUG=""
 #RUN cp /forms/forms-flow-forms/ /forms-flow-forms/app/
 
 RUN set -x \
-	&& chmod -R 777 /forms/
+	&& chmod -R 777 /app/
 
 # This will initialize the application based on
 # some questions to the user (login email, password, etc.)
