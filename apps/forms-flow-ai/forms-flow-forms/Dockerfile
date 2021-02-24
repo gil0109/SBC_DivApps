@@ -23,7 +23,7 @@ RUN git config --global url."https://github.com/".insteadOf "ssh://git@github.co
 # Clone code
 RUN git clone -b v4.0.0-alpha  https://github.com/AOT-Technologies/forms-flow-ai.git /web/
 RUN cp -rf /web/forms-flow-forms/* /app/
-
+COPY /web/forms-flow-forms /app
 # Using an alternative package install location
 # to allow overwriting the /app folder at runtime
 # stackoverflow.com/a/13021677
